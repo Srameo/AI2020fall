@@ -1,13 +1,22 @@
 import EightFigurePuzzle.eight_figure as ef
 
 count = 0
-flag = False                                        # flag 表示最终是否找到数据
+flag = False  # flag 表示最终是否找到数据
+
+
+def in_list(mp, lst):
+    for mp1 in lst:
+        if ef.compare(mp.get("map"), mp1.get("map")):
+            return True
+    else:
+        return False
+
 
 def bfs(b, e):
     global count, flag
     print("searching bfs ...")
 
-    mp = {"map": b, "board": 0, "parent": None}     # 最初的情形，宽度用于判断是否跳出，parent用于最后输出所有路径
+    mp = {"map": b, "board": 0, "parent": None}  # 最初的情形，宽度用于判断是否跳出，parent用于最后输出所有路径
     end_pos = e  # 结束节点
     board = ef.mp_size * ef.mp_size  # 探索的最大深度
     untracked = []  # 维护一个所有没探索过节点的队列
@@ -44,8 +53,8 @@ def bfs(b, e):
 
         # 如果可能出现的情形并没有在未探索队列中且未在已探索队列中，则加入未探索队列
         for mb in maybe:
-            if mb not in untracked:
-                if mb not in tracked:
+            if not in_list(mb, untracked):
+                if not in_list(mb, tracked):
                     untracked.append(mb.copy())
 
     # 如果找到通路，则输出
@@ -72,4 +81,3 @@ def bfs(b, e):
 if __name__ == '__main__':
     b, e = ef.init_map()
     bfs(b, e)
-

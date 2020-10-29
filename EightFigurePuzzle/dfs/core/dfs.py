@@ -1,21 +1,29 @@
 import EightFigurePuzzle.eight_figure as ef
 
 count = 0
-flag = False                                        # flag 表示最终是否找到数据
+flag = False  # flag 表示最终是否找到数据
+
+
+def in_list(mp, lst):
+    for mp1 in lst:
+        if ef.compare(mp.get("map"), mp1.get("map")):
+            return True
+    else:
+        return False
 
 
 def dfs(b: list, e: list):
     global count, flag
     print("searching dfs ...")
 
-    mp = {"map": b, "depth": 0, "parent": None}     # 最初的情形，深度用于判断是否跳出，parent用于最后超出所有路径
-    end_pos = e                                     # 结束节点
-    depth = ef.mp_size * ef.mp_size                 # 探索的最大深度
-    untracked = []                                  # 维护一个所有没探索过节点的栈
-    tracked = []                                    # 维护一个所有已经探索过节点的栈
+    mp = {"map": b, "depth": 0, "parent": None}  # 最初的情形，深度用于判断是否跳出，parent用于最后超出所有路径
+    end_pos = e  # 结束节点
+    depth = ef.mp_size * ef.mp_size  # 探索的最大深度
+    untracked = []  # 维护一个所有没探索过节点的栈
+    tracked = []  # 维护一个所有已经探索过节点的栈
 
     untracked.append(mp)
-    out_asr = []                                  # 输出的结果
+    out_asr = []  # 输出的结果
     temp = None
 
     # 当还有没探索过的节点时
@@ -32,7 +40,7 @@ def dfs(b: list, e: list):
         if temp.get("depth") > depth:
             continue
 
-        maybe = []                                  # 在当前情况的基础下，所有可能出现的情形
+        maybe = []  # 在当前情况的基础下，所有可能出现的情形
         idx = 0
         while idx < 4:
             mmp = temp.get("map")
@@ -43,10 +51,10 @@ def dfs(b: list, e: list):
                               "parent": mmp})
             idx += 1
 
-        # 如果可能出此案的情形并没有在未探索栈中且未在已探索栈中，则加入未探索栈
+        # 如果可能出现的情形并没有在未探索栈中且未在已探索栈中，则加入未探索栈
         for mb in maybe:
-            if mb not in untracked:
-                if mb not in tracked:
+            if not in_list(mb, untracked):
+                if not in_list(mb, tracked):
                     untracked.append(mb.copy())
 
     # 如果找到通路，则输出

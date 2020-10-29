@@ -6,6 +6,14 @@ max_depth = ef.mp_size * ef.mp_size
 count = 0
 
 
+def in_tracked(map1):
+    for mp in tracked:
+        if ef.compare(mp.get("map"), map1.get("map")):
+            return True
+    else:
+        return False
+
+
 def backtrack(b, e):
     print("searching backtrack ...")
 
@@ -39,9 +47,9 @@ def __backtrack(b, e, depth):
         flag = True
         return b
     # 到达最大搜索路径
-    if depth > max_depth:
+    if depth >= max_depth:
         return None
-    if b in tracked:
+    if in_tracked(b):
         return None
     else:
         tracked.append(b)

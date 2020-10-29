@@ -5,6 +5,14 @@ flag = False
 depth = ef.mp_size * ef.mp_size
 
 
+def in_list(mp, lst):
+    for mp1 in lst:
+        if ef.compare(mp.get("map"), mp1.get("map")):
+            return True
+    else:
+        return False
+
+
 def F(mp1):
     return mp1.get("G") + mp1.get("H")
 
@@ -60,7 +68,7 @@ def a_star(b, e):
         if temp.get("G") > depth:
             continue
 
-        maybe = []                                  # 在当前情况的基础下，所有可能出现的情形
+        maybe = []  # 在当前情况的基础下，所有可能出现的情形
         idx = 0
         while idx < 4:
             mmp = temp.get("map")
@@ -74,12 +82,7 @@ def a_star(b, e):
             idx += 1
 
         for mp1 in maybe:
-            in_tracked = False
-            for cls in tracked:
-                if ef.compare(cls.get("map"), mp1.get("map")):
-                    in_tracked = True
-                    break
-            if in_tracked:
+            if in_list(mp1, tracked):
                 continue
             for idx, mp2 in enumerate(untracked):
                 if ef.compare(mp2.get("map"), mp1.get("map")):
