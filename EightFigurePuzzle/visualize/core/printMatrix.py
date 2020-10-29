@@ -210,7 +210,7 @@ class Block(QLabel):
         if self.number == 0:
             self.setStyleSheet("background-color:white;border-radius:10px;")
         else:
-            self.setStyleSheet("background-color:red;border-radius:10px;")
+            self.setStyleSheet("background-color:brown;border-radius:10px;")
             self.setText(str(self.number))
 
 
