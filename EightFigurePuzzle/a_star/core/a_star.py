@@ -48,6 +48,8 @@ def a_star(b, e):
     global flag, depth, count
     print("searching A-Star ...")
 
+    flag = False
+
     mp = {"map": b, "G": 0, "parent": None, "H": H(b, e)}
     end_pos = e
 
@@ -87,7 +89,7 @@ def a_star(b, e):
             for idx, mp2 in enumerate(untracked):
                 if ef.compare(mp2.get("map"), mp1.get("map")):
                     if mp1.get("G") > mp2.get("G"):
-                        untracked[idx] = mp2
+                        untracked[idx] = mp2.copy()
                         break
             else:
                 untracked.append(mp1)

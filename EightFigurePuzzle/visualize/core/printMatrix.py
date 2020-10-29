@@ -4,7 +4,10 @@ from PyQt5.QtWidgets import QLabel, QWidget, QApplication, QGridLayout
 from PyQt5.QtGui import QFont, QPalette
 from PyQt5.QtCore import Qt, QTimer
 import EightFigurePuzzle.eight_figure as ef
-from EightFigurePuzzle.dfs.core.dfs import dfs
+import EightFigurePuzzle.dfs.core.dfs as DFS
+import EightFigurePuzzle.bfs.core.bfs as BFS
+import EightFigurePuzzle.a_star.core.a_star as ASTAR
+import EightFigurePuzzle.backtrack.core.backtrack as BACKTRACK
 
 
 # 用枚举类表示方向
@@ -72,14 +75,24 @@ class NumberHuaRong(QWidget):
     def keyPressEvent(self, event):
         key = event.key()
         if key == Qt.Key_D:
-            self.asr = dfs(self.begin, self.end)
-            self.timer.start(500)  # 设置计时间隔并启动
+            self.asr = DFS.dfs(self.begin, self.end)
+            if DFS.flag:
+                self.timer.start(500)  # 设置计时间隔并启动
+        elif key == Qt.Key_B:
+            self.asr = BFS.bfs(self.begin, self.end)
+            if BFS.flag:
+                self.timer.start(500)  # 设置计时间隔并启动
+        elif key == Qt.Key_A:
+            self.asr = ASTAR.a_star(self.begin, self.end)
+            if ASTAR.flag:
+                self.timer.start(500)  # 设置计时间隔并启动
+        elif key == Qt.Key_T:
+            self.asr = BACKTRACK.backtrack(self.begin, self.end)
+            if BACKTRACK.flag:
+                self.timer.start(500)  # 设置计时间隔并启动
         elif key == Qt.Key_R:
             self.begin, self.end = ef.init_map()
             self.numbers = self.begin
-            self.onInit()
-        elif key == Qt.Key_R:
-            # 刷新界面
             self.onInit()
         elif key == Qt.Key_3:
             ef.mp_size = 3

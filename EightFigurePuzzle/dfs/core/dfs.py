@@ -25,6 +25,7 @@ def dfs(b: list, e: list):
     untracked.append(mp)
     out_asr = []  # 输出的结果
     temp = None
+    flag = False
 
     # 当还有没探索过的节点时
     while len(untracked):

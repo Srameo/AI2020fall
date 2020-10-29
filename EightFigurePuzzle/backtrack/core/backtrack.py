@@ -15,7 +15,11 @@ def in_tracked(map1):
 
 
 def backtrack(b, e):
+    global flag
+
     print("searching backtrack ...")
+
+    flag = False
 
     m = {"map": b, "parent": None}
     temp = __backtrack(m, e, 0)
@@ -42,6 +46,7 @@ def backtrack(b, e):
 def __backtrack(b, e, depth):
     global flag, tracked, count
 
+    count += 1
     # 如果结果一致，则弹出
     if ef.compare(b.get("map"), e):
         flag = True
@@ -53,7 +58,6 @@ def __backtrack(b, e, depth):
         return None
     else:
         tracked.append(b)
-    count += 1
     pos = b
     nxt_pos = []
     idx = 0

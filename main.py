@@ -9,6 +9,7 @@ import EightFigurePuzzle.bfs.core.bfs as bf
 import EightFigurePuzzle.a_star.core.a_star as astar
 import time
 
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
@@ -40,6 +41,7 @@ if __name__ == '__main__':
     print(tplt.format("bfs", bf.flag, bf.count, bf_steps, bf_time))
     print(tplt.format("backtrack", bt.flag, bt.count, bt_steps, bt_time))
     print(tplt.format("A-Star", astar.flag, astar.count, a_star_steps, a_star_time))
-    print_hi('PyCharm')
+
+    print_hi('AI Search')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
