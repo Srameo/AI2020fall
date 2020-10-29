@@ -1,6 +1,6 @@
 import random
 
-mp_size = 4  # 地图大小
+mp_size = 3  # 地图大小
 
 
 def init_map():

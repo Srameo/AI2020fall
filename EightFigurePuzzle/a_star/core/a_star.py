@@ -91,7 +91,7 @@ def a_star(b, e):
 
         untracked.sort(key=F)
 
-    out_asr = None
+    out_asr = []
     # 如果找到通路，则输出
     if flag:
         asr = [temp.get("map")]
@@ -111,6 +111,7 @@ def a_star(b, e):
         print(flag)
 
     return out_asr
+
 
 if __name__ == '__main__':
     b, e = ef.init_map()

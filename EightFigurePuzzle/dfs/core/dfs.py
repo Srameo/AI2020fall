@@ -15,7 +15,7 @@ def dfs(b: list, e: list):
     tracked = []                                    # 维护一个所有已经探索过节点的栈
 
     untracked.append(mp)
-    out_asr = None                                  # 输出的结果
+    out_asr = []                                  # 输出的结果
     temp = None
 
     # 当还有没探索过的节点时

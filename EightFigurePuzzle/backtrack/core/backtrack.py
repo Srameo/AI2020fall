@@ -2,7 +2,7 @@ import EightFigurePuzzle.eight_figure as ef
 
 flag = False
 tracked = []
-max_depth = ef.mp_size * ef.mp_size * 4
+max_depth = ef.mp_size * ef.mp_size
 count = 0
 
 
@@ -11,7 +11,7 @@ def backtrack(b, e):
 
     m = {"map": b, "parent": None}
     temp = __backtrack(m, e, 0)
-    out_asr = None
+    out_asr = []
     if flag:
         asr = [temp.get("map")]
         p = temp.get("parent")
@@ -21,7 +21,7 @@ def backtrack(b, e):
                     asr.append(i.get("map"))
                     p = i.get("parent")
                     break
-        out_asr = asr
+        out_asr = asr.copy()
         print("answer: ")
         while len(asr):
             ef.printMap(asr.pop())
