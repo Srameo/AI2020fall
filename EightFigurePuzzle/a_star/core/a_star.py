@@ -49,6 +49,7 @@ def a_star(b, e):
     print("searching A-Star ...")
 
     flag = False
+    count = 0
 
     mp = {"map": b, "G": 0, "parent": None, "H": H(b, e)}
     end_pos = e

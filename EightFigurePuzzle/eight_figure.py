@@ -126,5 +126,17 @@ def printMap(mp):
         idx += 1
 
 
+def as_str(mp):
+    idx = 1
+    s = ""
+    for i in mp:
+        s += "{0:4}".format(i)
+        if idx % mp_size == 0:
+            s += "\n"
+        idx += 1
+    s += "\n"
+    return s
+
+
 if __name__ == '__main__':
     pass

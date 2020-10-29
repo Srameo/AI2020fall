@@ -26,6 +26,7 @@ def bfs(b, e):
     out_asr = []  # 输出的结果
     temp = None
     flag = False
+    count = 0
 
     # 当还有没探索过的节点时
     while len(untracked):

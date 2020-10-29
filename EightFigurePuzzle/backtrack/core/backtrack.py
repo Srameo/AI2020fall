@@ -15,7 +15,9 @@ def in_tracked(map1):
 
 
 def backtrack(b, e):
-    global flag
+    global flag, count
+
+    count = 0
 
     print("searching backtrack ...")
 
