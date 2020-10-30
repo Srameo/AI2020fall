@@ -90,7 +90,7 @@ class MainPage(QWidget):
                 ip.show()
             else:
                 ip = InfoPage(self, "Training Failed In DFS!\n")
-                ip.exec_()
+                ip.show()
 
         elif key == Qt.Key_B:
             start = time.time()
@@ -107,7 +107,7 @@ class MainPage(QWidget):
                 ip.show()
             else:
                 ip = InfoPage(self, "Training Failed In BFS!\n")
-                ip.exec_()
+                ip.show()
 
         elif key == Qt.Key_A:
             start = time.time()
@@ -124,7 +124,7 @@ class MainPage(QWidget):
                 ip.show()
             else:
                 ip = InfoPage(self, "Training Failed In ASTAR!\n")
-                ip.exec_()
+                ip.show()
 
         elif key == Qt.Key_T:
             start = time.time()
@@ -141,7 +141,7 @@ class MainPage(QWidget):
                 ip.show()
             else:
                 ip = InfoPage(self, "Training Failed In BACKTRACK!\n")
-                ip.exec_()
+                ip.show()
 
         elif key == Qt.Key_R:
             self.begin, self.end = ef.init_map()
@@ -153,6 +153,7 @@ class MainPage(QWidget):
             for i in range(self.gltMain.count()):
                 self.gltMain.itemAt(i).widget().deleteLater()
             self.onInit()
+
         elif key == Qt.Key_4:
             ef.mp_size = 4
             for i in range(self.gltMain.count()):
