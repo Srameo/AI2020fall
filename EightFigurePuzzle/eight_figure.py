@@ -4,9 +4,7 @@ mp_size = 3  # 地图大小
 
 
 def init_map():
-    """
-    初始化地图的函数
-    """
+    """初始化地图的函数，通过从结束位置随机走来达到一定有解的目的"""
     end_pos = []
     for i in range(1, mp_size * mp_size + 1):
         end_pos.append(i)
@@ -24,6 +22,7 @@ def init_map():
 
 
 def zero_loc(mp):
+    """查找一个地图中0的位置"""
     i = 0
     while i < mp_size * mp_size:
         if mp[i] == 0:
@@ -33,21 +32,25 @@ def zero_loc(mp):
 
 
 def can_up(mp):
+    """判断能否向上走"""
     zero = zero_loc(mp)
     return zero - mp_size > 0
 
 
 def can_down(mp):
+    """判断能否向下走"""
     zero = zero_loc(mp)
     return zero + mp_size < mp_size * mp_size
 
 
 def can_left(mp):
+    """判断能否往左走"""
     zero = zero_loc(mp)
     return zero % mp_size > 0
 
 
 def can_right(mp):
+    """判断能否往右走"""
     zero = zero_loc(mp)
     return zero % mp_size < mp_size - 1
 
@@ -109,6 +112,7 @@ can_motion = [can_up, can_down, can_left, can_right]
 
 
 def compare(map1, map2):
+    """比较两个地图是否相同"""
     i = 0
     while i < mp_size * mp_size:
         if map1[i] != map2[i]:
@@ -118,6 +122,7 @@ def compare(map1, map2):
 
 
 def printMap(mp):
+    """打印一个地图"""
     idx = 1
     for i in mp:
         print("{0:4}".format(i), end='')
@@ -127,6 +132,7 @@ def printMap(mp):
 
 
 def as_str(mp):
+    """将地图转换成字符串"""
     idx = 1
     s = ""
     for i in mp:
