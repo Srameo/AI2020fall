@@ -31,6 +31,7 @@ class MainPage(QWidget):
         self.mp_size = ef.mp_size
         self.begin, self.end = ef.init_map()
         self.timer = QTimer(self)  # 初始化一个定时器
+        self.a_star_timer = QTimer(self)  # 初始化一个定时器
         self.timer.timeout.connect(self.operate)  # 计时结束调用operate()方法
 
         self.initUI()
@@ -91,6 +92,9 @@ class MainPage(QWidget):
             else:
                 ip = InfoPage(self, "Training Failed In DFS!\n")
                 ip.show()
+
+        elif key == Qt.Key_S:
+            ASTAR.a_star_visualize(self, self.begin, self.end)
 
         elif key == Qt.Key_B:
             start = time.time()
@@ -163,19 +167,21 @@ class MainPage(QWidget):
     def operate(self):
         if self.asr:
             self.numbers = self.asr.pop()
-            self.blocks.clear()
-            for row in range(self.mp_size):
-                self.blocks.append([])
-                for column in range(self.mp_size):
-                    temp = self.numbers[row * self.mp_size + column]
-                    if temp == 0:
-                        self.zero_row = row
-                        self.zero_column = column
-                    self.blocks[row].append(temp)
-
+            self.updateBlocks()
             self.updatePanel()
         else:
             self.timer.stop()
+
+    def updateBlocks(self):
+        self.blocks.clear()
+        for row in range(self.mp_size):
+            self.blocks.append([])
+            for column in range(self.mp_size):
+                temp = self.numbers[row * self.mp_size + column]
+                if temp == 0:
+                    self.zero_row = row
+                    self.zero_column = column
+                self.blocks[row].append(temp)
 
     def updatePanel(self):
         for row in range(self.mp_size):

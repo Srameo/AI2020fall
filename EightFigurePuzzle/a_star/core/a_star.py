@@ -1,4 +1,5 @@
 import EightFigurePuzzle.eight_figure as ef
+from EightFigurePuzzle.visualize.core.printMatrix import MainPage, InfoPage
 
 count = 0  # 记录总共探索的节点数
 flag = False  # 记录是否有解
@@ -141,6 +142,94 @@ def a_star(b, e):
         print(flag)
 
     return out_asr
+
+
+_tracked = []
+_untracked = []
+_page: MainPage = None
+_end_pos = []
+
+
+def a_star_visualize(page: MainPage, b, e):
+    """可视化的A*算法"""
+    global flag, depth, count, _tracked, _untracked, _page, _end_pos
+    print("searching A-Star ...")
+
+    flag = False
+    count = 0
+    _page = page
+
+    mp = {"map": b, "G": 0, "parent": None, "H": H(b, e)}
+    _end_pos = e
+
+    ip = InfoPage(_page, "searching A-Star ...")
+    ip.show()
+
+    _untracked = [mp.copy()]  # 所有已经发现但还没有探索过的节点
+    _tracked = []  # 记录所有已经发现且已经探索过的节点
+
+    # 连接定时器
+    _page.a_star_timer.timeout.connect(__a_star_visualize)
+    _page.a_star_timer.start(100)
+
+
+def __a_star_visualize():
+    global flag, depth, count, _tracked, _untracked, _page, _end_pos
+    if not len(_untracked):
+        ip = InfoPage(_page, "searching failed!")
+        ip.show()
+        flag = False
+        _page.a_star_timer.stop()
+    # 弹出总消耗（G+H）最小的当前地图
+    temp = _untracked[0].copy()
+    # 加入已经探索的列表
+    _tracked.append(_untracked.pop(0))
+    count += 1
+
+    _page.numbers = temp.get("map")
+    _page.updateBlocks()
+    _page.updatePanel()
+    # 如果到达目标则跳出
+    if ef.compare(temp.get("map"), _end_pos):
+        flag = True
+        ip = InfoPage(_page, "Training Success In ASTAR!\n"
+                             "begin:\n" + ef.as_str(_page.begin) +
+                             "visited nodes: " + str(count) + "\n")
+        ip.show()
+        _page.a_star_timer.stop()
+        return
+    # 若果超过探索深度的限制也跳出
+    if temp.get("G") > depth:
+        return
+
+    maybe = []  # 在当前情况的基础下，所有可能出现的情形
+    idx = 0
+    while idx < 4:
+        mmp = temp.get("map")
+        # 如果可以朝哪个方向移动，将移动后的情形加入栈
+        if ef.can_motion[idx](mmp):
+            pos = ef.motion[idx](mmp)
+            maybe.append({"map": pos,
+                          "G": temp.get("G") + 1,  # 实际的步数在已有的步数上加一
+                          "parent": mmp,
+                          "H": H(pos, _end_pos)})  # 预测到最后的步数
+        idx += 1
+
+    for mp1 in maybe:
+        # 如果已经探索，则什么操作也不做
+        if in_list(mp1, _tracked):
+            continue
+        for idx, mp2 in enumerate(_untracked):
+            if ef.compare(mp2.get("map"), mp1.get("map")):
+                # 如果已经发现，判断G消耗之间的关系，如果小则替代掉，反之则什么也不做
+                if mp1.get("G") > mp2.get("G"):
+                    _untracked[idx] = mp2.copy()
+                    break
+        else:
+            # 如果当前节点没有被发现，则加入发现列表
+            _untracked.append(mp1)
+
+    _untracked.sort(key=F)  # 按照总消耗进行升序
 
 
 if __name__ == '__main__':
