@@ -4,6 +4,7 @@ flag = False
 tracked = []
 max_depth = ef.mp_size * ef.mp_size
 count = 0
+name = "backtrack"
 
 
 def in_tracked(map1):

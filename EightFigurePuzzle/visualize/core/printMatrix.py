@@ -153,12 +153,14 @@ class MainPage(QWidget):
             self.onInit()
 
         elif key == Qt.Key_3:
+            self.setWindowTitle('八数码问题')
             ef.mp_size = 3
             for i in range(self.gltMain.count()):
                 self.gltMain.itemAt(i).widget().deleteLater()
             self.onInit()
 
         elif key == Qt.Key_4:
+            self.setWindowTitle('十五数码问题')
             ef.mp_size = 4
             for i in range(self.gltMain.count()):
                 self.gltMain.itemAt(i).widget().deleteLater()

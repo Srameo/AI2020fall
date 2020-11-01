@@ -2,6 +2,7 @@ import EightFigurePuzzle.eight_figure as ef
 
 count = 0
 flag = False  # flag 表示最终是否找到数据
+name = "bfs"
 
 
 def in_list(mp, lst):

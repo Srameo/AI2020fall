@@ -4,6 +4,7 @@ from EightFigurePuzzle.visualize.core.printMatrix import MainPage, InfoPage
 count = 0  # 记录总共探索的节点数
 flag = False  # 记录是否有解
 depth = ef.mp_size * ef.mp_size  # 探索的深度
+name = "A-star"
 
 
 def in_list(mp, lst):
