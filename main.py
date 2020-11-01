@@ -88,10 +88,11 @@ def command_help():
     print("\t3 : 把地图变为3*3，即8数码问题")
     print("\t4 : 把地图变为4*4，即15数码问题")
     print("\ts : 显示A-star算法的搜索过程")
+    print("backtrack: 使用backtrack算法搜索当前地图")
     print("astar  :   使用A-star算法搜索当前地图")
     print("bfs    :   使用bfs算法搜索当前地图")
     print("dfs    :   使用dfs算法搜索当前地图")
-    print("backtrack: 使用backtrack算法搜索当前地图")
+    print("q      :   退出")
 
 
 def command(c):
@@ -104,14 +105,14 @@ def command(c):
         ef.mp_size = 4
         b, e = ef.init_map()
         print("map size changed to 4!")
-    elif c == 'h':
+    elif c == 'h' or c == 'help':
         command_help()
-    elif c == 'r':
+    elif c == 'r' or c == 'refresh':
         b, e = ef.init_map()
         print("map refreshed!")
     elif c == "run":
         run()
-    elif c == "v":
+    elif c == "v" or c == "visualize":
         app = QApplication(sys.argv)
         ex = MainPage()
         app.exec_()
@@ -123,23 +124,27 @@ def command(c):
         run_func(astar.a_star, astar)
     elif c == "backtrack":
         run_func(bt.backtrack, bt)
-    elif c == "begin":
+    elif c == "begin" or c == "b":
         print("begin:")
         ef.printMap(b)
-    elif c == "end":
+    elif c == "end" or c == "e":
         print("end:")
         ef.printMap(e)
     else:
         print("没有此指令，请重新输入！")
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
+def main_thread():
     command_help()
     c = input("请输入指令: ")
     while c != 'q':
         command(c)
         c = input("请输入指令: ")
     print("bye!")
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    main_thread()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

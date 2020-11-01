@@ -14,6 +14,12 @@ def in_list(mp, lst):
 
 
 def dfs(b: list, e: list):
+    """
+    深度优先算法
+    :param b: 初始情形
+    :param e: 结束情形
+    :return: 一个列表，包含从 b->e 的一个解法
+    """
     global count, flag
     print("searching dfs ...")
 

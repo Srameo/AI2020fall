@@ -14,6 +14,12 @@ def in_list(mp, lst):
 
 
 def bfs(b, e):
+    """
+    宽度优先搜索实现
+    :param b: 起始状态
+    :param e: 结束状态
+    :return: 一个包含路径的栈
+    """
     global count, flag
     print("searching bfs ...")
 

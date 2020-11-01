@@ -47,6 +47,13 @@ def backtrack(b, e):
 
 
 def __backtrack(b, e, depth):
+    """
+    回溯算法递归函数
+    :param b: 当前情形
+    :param e: 结束情形
+    :param depth: 当前搜索的步数
+    :return: 结果节点
+    """
     global flag, tracked, count
 
     count += 1
@@ -72,11 +79,14 @@ def __backtrack(b, e, depth):
                             "parent": mmp})
         idx += 1
 
+    # 对于所有可能出现的情况，都进行一次递归
     for i in nxt_pos:
         asr = __backtrack(i, e, depth + 1)
+        # 如果找到结果
         if flag:
             return asr
 
+    # 没找到结果返回当前节点
     return b
 
 
